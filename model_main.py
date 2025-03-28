@@ -11,7 +11,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder 
 from sklearn.model_selection import cross_val_score,cross_val_predict,RepeatedStratifiedKFold 
 from sklearn.metrics import classification_report,confusion_matrix,roc_auc_score
-dataset_path = "D:\\predictive-maintenance-dataset-ai4i-2020\\ai4i2020.csv"
+dataset_path = "D:\\PdM_model\\data\\projectdataset\\ai4i2020.csv"
 pdm_dataset = pd.read_csv(dataset_path)
 print(pdm_dataset['Product ID'].nunique())
 pdm_dataset.drop(['UDI','Product ID'],axis = 1,inplace = True)
