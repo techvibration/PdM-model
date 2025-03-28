@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-print("XGBoost version:", xgb.__version__)
+#print("XGBoost version:", xgb.__version__)
 from imblearn.combine import SMOTETomek
 
 from xgboost import XGBClassifier
