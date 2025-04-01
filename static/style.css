@@ -1,0 +1,77 @@
+/* style.css */
+
+/* Reset some default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Overall body style */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Main title styling */
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #2c3e50;
+  }
+  
+  /* Styling for live sensor data section */
+  #sensor_data {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #27ae60;
+  }
+  
+  /* Alert message styling */
+  #alert {
+    color: #c0392b;
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+  
+  /* Container for performance metrics */
+  .metric {
+    margin-top: 30px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* Metric headings */
+  .metric h3 {
+    margin-bottom: 10px;
+    color: #34495e;
+  }
+  
+  /* Responsive iframe for classification report */
+  iframe {
+    border: none;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    display: block;
+  }
+  
+  /* Add some spacing between sections */
+  section {
+    margin-bottom: 40px;
+  }
+  
+  /* Optional: styling for images (ROC curve, confusion matrix) */
+  .metric img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  
