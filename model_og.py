@@ -29,7 +29,7 @@ new_dataset_columns = list(ohe_type) + ['Air_temp'] + ['Process_temp'] + ['Rotat
 pdm_dataset_transformed = pd.DataFrame(transformed_data, columns = new_dataset_columns)
 #print(pdm_dataset_transformed.head())
 #print(list(ohe_type))
-pdm_dataset_transformed.drop(['TWF','HDF','PWF','OSF','RNF'],axis = 1,inplace = True)
+pdm_dataset_transformed.drop(['Air_temp','TWF','HDF','PWF','OSF','RNF'],axis = 1,inplace = True)
 y = pdm_dataset_transformed['Machine_failure']
 X = pdm_dataset_transformed.drop('Machine_failure',axis = 1)
 
@@ -56,7 +56,7 @@ print("Mean Cross Validation score",np.mean(CV_scores))
 predictions = pdm_model.predict(test_X)
 probablity = pdm_model.predict_proba(test_X)[:,1]
 #setting threshold to increase recall of the failure class
-threshold = 0.4
+threshold = 0.3
 custom_predictions = (probablity >= threshold).astype(int)
 #printing the classification report for precision,recall,f1score
 print("Classification Report:")
@@ -67,7 +67,7 @@ print (confusion_matrix(test_y,custom_predictions))
 #Calculate the roc-aur score
 roc_auc = roc_auc_score(test_y,custom_predictions)
 print("ROC-AUC score:",roc_auc)
-joblib.dump(pdm_model,'model2.pkl')
-print("model saved as model2.pkl")
-joblib.dump(ct,'ct2.pkl')
-print("ct saved as ct2.pkl")
+#joblib.dump(pdm_model,'model2.pkl')
+#print("model saved as model2.pkl")
+#joblib.dump(ct,'ct2.pkl')
+#print("ct saved as ct2.pkl")

@@ -18,7 +18,7 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Load your pre-trained model (ensure model1.pkl is in your project directory)
-pdm_model = joblib.load('model1.pkl')
+pdm_model = joblib.load('model3.pkl')
 preprocessor = joblib.load('ct.pkl')
 
 # Global storage for simulation results
@@ -35,13 +35,13 @@ def index():
 @app.route('/simulate', methods=['GET'])
 def simulate():
     global latest_results
-    n_samples = 50  # Number of simulated samples
+    n_samples = 2000  # Number of simulated samples
 
     # Generate random sensor data (adjust ranges as needed)
     air_temp = np.random.uniform(297, 299, n_samples)            # Air Temperature (°C)
     process_temp = np.random.uniform(307, 313, n_samples)        # Process Temperature (°C)
-    rpm = np.random.uniform(1200, 1800, n_samples)                # RPM
-    torque = np.random.uniform(10, 80, n_samples)               # Torque (arbitrary units)
+    rpm = np.random.uniform(1200, 2900, n_samples)                # RPM
+    torque = np.random.uniform(10, 100, n_samples)               # Torque (arbitrary units)
     toolwear = np.random.uniform(0, 500, n_samples)                # Tool Wear (normalized 0-1)
     model_type = np.random.choice(['M','L','H'],n_samples)
     # Create a DataFrame with the sensor data
@@ -87,6 +87,7 @@ def simulate():
 
     # Prepare the results dictionary
     results = {
+
         'roc_auc': roc_auc,
         'confusion_matrix': cm.tolist(),  # Convert numpy array to list for JSON serialization
         'classification_report': report,

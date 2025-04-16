@@ -45,7 +45,7 @@ estimators = [
     ('xgb2', model2)
 ]
 
-# Choose a meta-learner (Logistic Regression works well in many cases)
+# Choose a meta-learner 
 meta_learner = LogisticRegression()
 
 # Create the stacking classifier
@@ -64,3 +64,5 @@ print (confusion_matrix(y_test,final_predictions))
 #Calculate the roc-aur score
 roc_auc = roc_auc_score(y_test,final_predictions)
 print("ROC-AUC score:",roc_auc)
+joblib.dump(stacking_model,'model3.pkl')
+print("model saved as model3.pkl")

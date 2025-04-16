@@ -37,6 +37,9 @@ pdm_dataset_transformed.drop(['TWF','HDF','PWF','OSF','RNF'],axis = 1,inplace = 
 y = pdm_dataset_transformed['Machine_failure']
 X = pdm_dataset_transformed.drop('Machine_failure',axis = 1)
 train_X,test_X,train_y,test_y = train_test_split(X,y,test_size = 0.2,stratify = y,random_state = 42) 
+test_X.to_csv('X_val.csv', index=False)
+test_y.reset_index(drop=True).to_frame(name='Machine failure').to_csv('y_val.csv', index=False)
+
 #using scale_pos_weight to increase recall
 scale_pos_weight = (train_y == 0).sum() / (train_y == 1).sum()
 adjusted_scale_pos_weight = scale_pos_weight * 2.5

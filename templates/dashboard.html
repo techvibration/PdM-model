@@ -32,7 +32,7 @@
         </div>
         <div class="metric">
             <h3>ROC Curve</h3>
-            <img src="/plot_roc" alt="ROC Curve">
+            <img src="/plot_roc_curve" alt="ROC Curve">
         </div>
         <div class="metric">
             <h3>Classification Report</h3>
@@ -43,13 +43,38 @@
     <script>
         // Connect to the Flask-SocketIO server
         var socket = io.connect('http://127.0.0.1:5000');
+        window.onload = () => {
+  fetch('/validate')
+    .catch(console.error);
+};
+
 
         
-        // Update sensor data on the dashboard
-        socket.on('simulation_update', function(data) {
-            // For demonstration, display the first prediction from the simulation update
-            document.getElementById('sensor_data').innerText = data.predictions[0];
-        });
+        // For validation metrics:
+socket.on('validation_results', function(data) {
+  // data.confusion_matrix, data.roc_auc, data.classification_report, etc.
+  document.querySelector('img[alt="Confusion Matrix"]').src = 
+    '/plot_confusion_matrix?' + Date.now();
+  document.querySelector('img[alt="ROC Curve"]').src = 
+    '/plot_roc_curve?' + Date.now();
+  // If you want to refresh the classification report iframe:
+  document.querySelector('iframe').src = '/classification_report?' + Date.now();
+});
+
+      // For live sensor predictions from the Pi:
+socket.on('realtime_prediction', function(data) {
+  document.getElementById('sensor_data').innerText = data.prediction;
+  
+  if (data.probability > 0.5) {
+    const alertElem = document.getElementById('alert');
+    alertElem.innerText = '⚠️ High failure risk!';
+    setTimeout(() => {
+      alertElem.innerText = "";
+    }, 5000);
+  }
+});
+
+
         
         // Show alert if sensor value exceeds threshold
         socket.on('alert', function(data) {
